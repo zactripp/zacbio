@@ -96,6 +96,10 @@ export default function StravaStats() {
         </Link>{" "}
         Stats
       </h2>
+      <p className="text-xs font-mono">
+        live stream from strava api v3. Local cache, revalidate every 15 mins
+        due to ratelimits
+      </p>
       <div className="flex flex-row gap-8">
         <div>
           <p className="font-mono font-bold pt-2">Runs</p>

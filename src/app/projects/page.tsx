@@ -72,6 +72,18 @@ export default async function Projects() {
               Github
             </Link>
           </div>
+          <div>
+            <p className="font-mono font-bold">Acid Gambit (brand)</p>
+            <p>
+              Fitness brand, creative outlet, and annual mid-5 fig side biz.
+            </p>
+            <Link
+              className="underline underline-offset-1 text-sm font-mono text-slate-600"
+              href="https://instagram.com/acidgambit"
+            >
+              Instagram
+            </Link>
+          </div>
         </div>
       </div>
     </main>
