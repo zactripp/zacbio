@@ -23,12 +23,12 @@ export function Navbar() {
           >
             projects
           </a>
-          <a
+          {/* <a
             className="text-sm font-medium hover:underline underline-offset-4"
             href="/about"
           >
             about
-          </a>
+          </a> */}
         </nav>
       </div>
     </header>

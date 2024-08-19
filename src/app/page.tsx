@@ -3,7 +3,7 @@ import StravaStats from "./_components/stats";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center w-full pt-2 pb-8">
+    <main className="flex flex-col items-center w-full pt-2 pb-4">
       <div className="max-w-[650px] w-full px-4 sm:px-6 md:px-8">
         <Image
           src="/spacex2.jpeg"
