@@ -85,7 +85,7 @@ export default function StravaStats() {
     return <div className="pt-8 text-sm font-mono">No stats available</div>;
 
   return (
-    <div className="pt-8">
+    <div>
       <h2>
         Trailing 28 Day{" "}
         <Link

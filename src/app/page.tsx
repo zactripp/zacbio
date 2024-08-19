@@ -38,8 +38,18 @@ export default function Home() {
               </li>
             </ul>
           </div>
+          <StravaStats />
+          <div>
+            <h2>Personal Fitness Stats</h2>
+            <ul>
+              <li>1-mile run: 4:54 min</li>
+              <li>400m run: 59 sec</li>
+              <li>10-mile run: 6:36/mi</li>
+              <li>Cindy: 24 rounds</li>
+              <li>1RM Bench: 340, 1RM Deadlift: 445</li>
+            </ul>
+          </div>
         </div>
-        <StravaStats />
       </div>
     </main>
   );
