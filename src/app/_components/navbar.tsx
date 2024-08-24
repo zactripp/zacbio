@@ -25,9 +25,9 @@ export function Navbar() {
           </a>
           {/* <a
             className="text-sm font-medium hover:underline underline-offset-4"
-            href="/about"
+            href="/bad-writing"
           >
-            about
+            bad writing
           </a> */}
         </nav>
       </div>

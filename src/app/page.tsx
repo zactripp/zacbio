@@ -1,5 +1,7 @@
 import Image from "next/image";
 import StravaStats from "./_components/stats";
+import Recents from "./_components/recents";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
@@ -27,28 +29,20 @@ export default function Home() {
               enhancements.
             </p>
           </div>
+          <Separator />
           <div>
             <h2>Stack</h2>
             <ul>
-              <li>🦚 Frontend: Next.js, ReactJS</li>
-              <li>💾 Backend: tRPC, Drizzle, Prisma</li>
-              <li>🏎️ Languages: TypeScript, Python, SQL</li>
-              <li>
-                Other: MySQL, Vercel Postgres, Supabase, Tailwind, Solidity
-              </li>
+              <li>- Frontend: Next, React</li>
+              <li>- Backend: tRPC, Drizzle, Prisma</li>
+              <li>- Languages: TypeScript, Python, Go</li>
+              <li>- Other: MySQL, Postgres, Tailwind, Solidity</li>
             </ul>
           </div>
+          <Separator />
           <StravaStats />
-          <div>
-            <h2>Personal Fitness Stats</h2>
-            <ul>
-              <li>1-mile run: 4:54 min</li>
-              <li>400m run: 59 sec</li>
-              <li>10-mile run: 6:36/mi</li>
-              <li>Cindy: 24 rounds</li>
-              <li>1RM Bench: 340, 1RM Deadlift: 445</li>
-            </ul>
-          </div>
+          <Separator />
+          <Recents />
         </div>
       </div>
     </main>

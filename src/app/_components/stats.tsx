@@ -23,6 +23,8 @@ export default function StravaStats() {
 
   const CACHE_KEY = "stravaStats";
   const CACHE_DURATION = 900000; // 15 min in milliseconds
+  // testing
+  // const CACHE_DURATION = 10000; // 10 seconds in milliseconds
 
   function getFromCache() {
     const cached = localStorage.getItem(CACHE_KEY);
@@ -57,7 +59,7 @@ export default function StravaStats() {
         }
 
         // If not in cache, fetch from API
-        const response = await fetch("/api/strava");
+        const response = await fetch("/api/strava/stats");
         if (!response.ok) {
           throw new Error("Failed to fetch stats");
         }
