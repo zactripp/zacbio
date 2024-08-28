@@ -1,20 +1,29 @@
 import { NextResponse } from 'next/server';
 
+const clientId = process.env.STRAVA_CLIENT_ID;
+const clientSecret = process.env.STRAVA_CLIENT_SECRET;
+const refreshToken = process.env.STRAVA_REFRESH_TOKEN;
+
+const userId = 7445195; // Your Strava user id
+const TOKEN_ENDPOINT = "https://www.strava.com/oauth/token";
+const ATHLETES_ENDPOINT = `https://www.strava.com/api/v3/athletes/${userId}`;
+
 async function getAccessToken() {
-  const params = new URLSearchParams({
-    client_id: process.env.STRAVA_CLIENT_ID as string,
-    client_secret: process.env.STRAVA_CLIENT_SECRET as string,
-    refresh_token: process.env.STRAVA_REFRESH_TOKEN as string,
-    grant_type: 'refresh_token',
+  const body = JSON.stringify({
+    client_id: clientId,
+    client_secret: clientSecret,
+    refresh_token: refreshToken,
+    grant_type: "refresh_token",
   });
 
   try {
-    const response = await fetch('https://www.strava.com/oauth/token', {
-      method: 'POST',
+    const response = await fetch(TOKEN_ENDPOINT, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
       },
-      body: params,
+      body,
     });
 
     if (!response.ok) {
@@ -23,9 +32,7 @@ async function getAccessToken() {
     }
 
     const data = await response.json();
-    console.log("----------------------------");
-    console.log('ACCESS TOKEN', data.access_token);
-    console.log("----------------------------");
+    // console.log("New access token obtained:", data.access_token);
     return data.access_token;
   } catch (error) {
     console.error('Error in getAccessToken:', error);
@@ -38,47 +45,64 @@ export async function GET(
   { params }: { params: { type: string } }
 ) {
   try {
-    const accessToken = await getAccessToken();
     const { type } = params;
+
+    // Define revalidate duration (10 minutes for production)
+    const REVALIDATE_TIME = 600;
 
     let data;
     if (type === 'stats') {
-      const response = await fetch(
-        'https://www.strava.com/api/v3/athletes/7445195/stats',
-        {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Accept': 'application/json'
-          }
-        }
-      );
+      const accessToken = await getAccessToken();
+      const url = 'https://www.strava.com/api/v3/athletes/7445195/stats';
+      
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Accept': 'application/json'
+        },
+        next: { revalidate: REVALIDATE_TIME }
+      });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
       }
 
       data = await response.json();
     } else if (type === 'activities') {
-      const response = await fetch(
-        'https://www.strava.com/api/v3/athlete/activities?per_page=5',
-        {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Accept': 'application/json'
-          }
-        }
-      );
+      const accessToken = await getAccessToken();
+      const url = 'https://www.strava.com/api/v3/athlete/activities?per_page=5';
+      
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Accept': 'application/json'
+        },
+        next: { revalidate: REVALIDATE_TIME }
+      });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
       }
 
-      data = await response.json(); // Return all 5 activities
+      data = await response.json();
+      
+      if (Array.isArray(data) && data.length > 0) {
+        console.log('Most recent activity date:', new Date(data[0].start_date).toLocaleString());
+      } else {
+        console.log('No activities found or data is not an array');
+      }
     } else {
       return NextResponse.json({ error: 'Invalid endpoint' }, { status: 400 });
     }
 
-    return NextResponse.json(data);
+    // Return the response with cache headers
+    return NextResponse.json(data, {
+      headers: {
+        'Cache-Control': `s-maxage=${REVALIDATE_TIME}, stale-while-revalidate`,
+      },
+    });
   } catch (error) {
     console.error('Error fetching Strava data:', error);
     return NextResponse.json({ error: 'Failed to fetch Strava data' }, { status: 500 });

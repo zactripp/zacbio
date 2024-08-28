@@ -23,53 +23,16 @@ export default function Recents() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const CACHE_KEY = "stravaActivities";
-  const CACHE_DURATION = 900000; // 15 min in milliseconds
-
-  function getFromCache() {
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      const { data, timestamp } = JSON.parse(cached);
-      if (Date.now() - timestamp < CACHE_DURATION) {
-        return data;
-      }
-    }
-    return null;
-  }
-
-  function setToCache(data: StravaActivity[]) {
-    localStorage.setItem(
-      CACHE_KEY,
-      JSON.stringify({
-        data,
-        timestamp: Date.now(),
-      })
-    );
-  }
-
   useEffect(() => {
     const fetchLatestActivities = async () => {
       try {
-        // Check cache first
-        const cachedActivities = getFromCache();
-        if (cachedActivities) {
-          setActivities(cachedActivities);
-          setLoading(false);
-          return;
-        }
-
-        // If not in cache, fetch from API
         const response = await fetch("/api/strava/activities");
         if (!response.ok) {
           throw new Error("Failed to fetch latest activities");
         }
         const data = await response.json();
-        // Log all activities returned from the API
-        console.log("All activities returned from API:", data);
-        // Ensure data is an array before setting it to state
         const activitiesData = Array.isArray(data) ? data : [data];
         setActivities(activitiesData);
-        setToCache(activitiesData);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching latest activities:", error);
@@ -96,7 +59,11 @@ export default function Recents() {
         <div key={activity.id} className="border p-4 rounded-lg mb-4">
           <div className="flex flex-row gap-2">
             <h3 className="font-semibold">{activity.name}</h3>
-            <Badge variant="acid">{activity.type}</Badge>
+            <Badge variant="acid">
+              {activity.type === "WeightTraining"
+                ? "Weight Training"
+                : activity.type}
+            </Badge>
           </div>
           <p className="text-xs font-mono pb-2">
             {new Date(activity.start_date).toLocaleDateString()}
