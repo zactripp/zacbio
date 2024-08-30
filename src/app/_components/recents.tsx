@@ -52,10 +52,6 @@ export default function Recents() {
   return (
     <div>
       <h2 className="pb-2">Latest Activities</h2>
-      {/* <p className="text-xs font-mono mb-4">
-        Live stream from Strava API v3. Local cache, revalidate every 15 mins
-        due to rate limits
-      </p> */}
       {activities.map((activity) => (
         <div key={activity.id} className="border p-4 rounded-lg mb-4">
           <div className="flex flex-row gap-2">
@@ -70,10 +66,13 @@ export default function Recents() {
             {new Date(activity.start_date).toLocaleDateString()}
           </p>
           <p>
-            {(activity.distance / 1609.34).toFixed(2)} miles |{" "}
             {Math.floor(activity.moving_time / 60) >= 60
               ? `${Math.floor(activity.moving_time / 3600)}h ${Math.floor((activity.moving_time % 3600) / 60)}m`
-              : `${Math.floor(activity.moving_time / 60)}m`}
+              : `${Math.floor(activity.moving_time / 60)}m`}{" "}
+            |{" "}
+            {activity.distance === 0
+              ? "Whoop strap auto upload"
+              : `${(activity.distance / 1609.34).toFixed(2)} miles`}
           </p>
         </div>
       ))}
