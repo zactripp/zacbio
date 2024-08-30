@@ -32,6 +32,7 @@ export default function Recents() {
         }
         const data = await response.json();
         const activitiesData = Array.isArray(data) ? data : [data];
+        console.log("Fetched Strava activities:", activitiesData); // Added console log
         setActivities(activitiesData);
         setLoading(false);
       } catch (error) {
