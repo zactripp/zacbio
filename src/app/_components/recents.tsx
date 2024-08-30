@@ -54,14 +54,8 @@ export default function Recents() {
       <h2 className="pb-2">Latest Activities</h2>
       {activities.map((activity) => (
         <div key={activity.id} className="border p-4 rounded-lg mb-4">
-          <div className="flex flex-row gap-2">
-            <h3 className="font-semibold">{activity.name}</h3>
-            <Badge variant="acid">
-              {activity.type === "WeightTraining"
-                ? "Weight Training"
-                : activity.type}
-            </Badge>
-          </div>
+          <h3 className="font-semibold">{activity.name}</h3>
+
           <p className="text-xs font-mono pb-2">
             {new Date(activity.start_date).toLocaleDateString()}
           </p>
@@ -74,6 +68,11 @@ export default function Recents() {
               ? "Whoop strap auto upload"
               : `${(activity.distance / 1609.34).toFixed(2)} miles`}
           </p>
+          <Badge variant="acid">
+            {activity.type === "WeightTraining"
+              ? "Weight Training"
+              : activity.type}
+          </Badge>
         </div>
       ))}
     </div>

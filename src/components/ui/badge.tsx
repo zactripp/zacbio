@@ -15,7 +15,8 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
-        acid: "bg-emerald-400 text-white",
+        acid: "bg-emerald-400 text-black",
+        strava: "bg-orange-500 text-white",
       },
     },
     defaultVariants: {
