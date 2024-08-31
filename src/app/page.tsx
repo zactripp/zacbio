@@ -2,10 +2,18 @@ import Image from "next/image";
 import StravaStats from "./_components/stats";
 import Recents from "./_components/recents";
 import { Separator } from "@/components/ui/separator";
+import { getAccessToken } from "@/lib/strava";
 
-export default function Home() {
+export default async function Home() {
+  // let accessToken;
+  // try {
+  //   accessToken = await getAccessToken();
+  // } catch (error) {
+  //   console.error("Failed to get access token or stats:", error);
+  // }
+
   return (
-    <main className="flex flex-col items-center w-full pt-2 pb-8">
+    <main className="flex flex-col items-center w-full pt-2 pb-8 h-screen">
       <div className="max-w-[650px] w-full px-4 sm:px-6 md:px-8">
         <Image
           src="/spacex2.jpeg"
@@ -39,10 +47,10 @@ export default function Home() {
               <li>- Other: MySQL, Postgres, Tailwind, Solidity</li>
             </ul>
           </div>
-          <Separator />
-          <StravaStats />
+          {/* <Separator />
           <Separator />
           <Recents />
+          {accessToken && <p>Access Token: {accessToken}</p>} */}
         </div>
       </div>
     </main>

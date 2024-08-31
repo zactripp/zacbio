@@ -16,7 +16,11 @@ interface StravaStats {
   };
 }
 
-export default function StravaStats() {
+interface StravaStatsProps {
+  stravaStats: StravaStats;
+}
+
+export default function StravaStats({ stravaStats }: StravaStatsProps) {
   const [stats, setStats] = useState<StravaStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

@@ -2,33 +2,31 @@ import { NextResponse } from 'next/server';
 
 const clientId = process.env.STRAVA_CLIENT_ID;
 const clientSecret = process.env.STRAVA_CLIENT_SECRET;
-let refreshToken = process.env.STRAVA_REFRESH_TOKEN;
+const refreshToken = process.env.STRAVA_REFRESH_TOKEN;
 
-const TOKEN_ENDPOINT = "https://www.strava.com/oauth/token";
-
-let accessToken: string | null = null;
-let expiresAt: number = 0;
+const url = 'https://www.strava.com/oauth/token';
 
 async function getAccessToken() {
-  const now = Math.floor(Date.now() / 1000);
+  // const now = Math.floor(Date.now() / 1000);
 
-  if (accessToken && expiresAt > now) {
-    console.log("Using existing access token");
-    return accessToken;
+  if (!clientId || !clientSecret || !refreshToken) {
+    return NextResponse.json({ error: 'Missing environment variables' }, { status: 500 });
   }
-
-  console.log("Refreshing access token");
-
+  
   const params = new URLSearchParams({
-    client_id: clientId!,
-    client_secret: clientSecret!,
-    refresh_token: refreshToken!,
+    client_id: clientId,
+    client_secret: clientSecret,
+    refresh_token: refreshToken,
     grant_type: "refresh_token",
   });
 
   try {
-    const response = await fetch(`${TOKEN_ENDPOINT}?${params}`, {
+    const response = await fetch(url, {
       method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: params
     });
 
     if (!response.ok) {
@@ -37,11 +35,10 @@ async function getAccessToken() {
     }
 
     const data = await response.json();
-    accessToken = data.access_token;
-    expiresAt = data.expires_at;
-    refreshToken = data.refresh_token; // Update the refresh token
+    const accessToken = data.access_token;
 
-    console.log("New access token obtained. Expires at:", new Date(expiresAt * 1000).toLocaleString());
+    // console.log("New access token obtained. Expires at:", new Date(expiresAt * 1000).toLocaleString());
+    console.log("------------- new access token:", accessToken);
     return accessToken;
   } catch (error) {
     console.error('Error in getAccessToken:', error);
@@ -75,7 +72,7 @@ export async function GET(
 
     // Always get a fresh access token
     const accessToken = await getAccessToken();
-    console.log("Access token:", accessToken);
+    console.log("Access token today 31aug:", accessToken);
 
     let data;
     if (type === 'stats') {
