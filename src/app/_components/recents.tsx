@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 
 interface Activity {
   id: string;
@@ -14,8 +15,9 @@ export default function Recents({ activities }: { activities: any }) {
     <div>
       <h2 className="pb-2">Latest Activities</h2>
       {activities.map((activity: Activity) => (
-        <div key={activity.id} className="border p-4 rounded-lg mb-4">
-          <h3 className="font-semibold">{activity.name}</h3>
+        <div key={activity.id} className="py-2">
+          <Separator />
+          <h3 className="font-semibold pt-2">{activity.name}</h3>
 
           <p className="text-xs font-mono pb-2">
             {new Date(activity.start_date).toLocaleDateString()}
