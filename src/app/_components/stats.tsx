@@ -1,59 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { useState, useEffect } from "react";
 
-interface StravaStats {
-  recent_run_totals: {
-    count: number;
-    distance: number;
-    moving_time: number;
-  };
-  recent_ride_totals: {
-    count: number;
-    distance: number;
-    moving_time: number;
-  };
-}
-
-interface StravaStatsProps {
-  stravaStats: StravaStats;
-}
-
-export default function StravaStats({ stravaStats }: StravaStatsProps) {
-  const [stats, setStats] = useState<StravaStats | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await fetch("/api/strava/stats");
-        if (!response.ok) {
-          throw new Error("Failed to fetch stats");
-        }
-        const data = await response.json();
-        setStats(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching stats:", error);
-        setError("Failed to load Strava stats");
-        setLoading(false);
-      }
-    };
-
-    fetchStats();
-  }, []);
-
-  if (loading)
-    return (
-      <div className="pt-8 text-sm font-mono">Loading Strava stats...</div>
-    );
-  if (error)
-    return <div className="pt-8 text-sm font-mono">Error: {error}</div>;
-  if (!stats)
-    return <div className="pt-8 text-sm font-mono">No stats available</div>;
-
+export default function StravaStats({ stats }: { stats: any }) {
   return (
     <div>
       <h2>
@@ -70,6 +17,7 @@ export default function StravaStats({ stravaStats }: StravaStatsProps) {
         live stream from strava api v3. Local cache, revalidate every 10 mins
         due to ratelimits
       </p>
+
       <div className="flex flex-row gap-8">
         <div>
           <p className="font-mono font-bold pt-2">Runs</p>

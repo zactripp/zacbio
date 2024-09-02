@@ -1,58 +1,19 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { useState, useEffect } from "react";
 
-interface StravaActivity {
-  id: number;
+interface Activity {
+  id: string;
   name: string;
-  distance: number;
-  moving_time: number;
   start_date: string;
+  moving_time: number;
+  distance: number;
   type: string;
 }
 
-export default function Recents() {
-  const [activities, setActivities] = useState<StravaActivity[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchLatestActivities = async () => {
-      try {
-        const response = await fetch("/api/strava/activities");
-        if (!response.ok) {
-          throw new Error("Failed to fetch latest activities");
-        }
-        const data = await response.json();
-        const activitiesData = Array.isArray(data) ? data : [data];
-        console.log("Fetched Strava activities:", activitiesData); // Added console log
-        setActivities(activitiesData);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching latest activities:", error);
-        setError("Failed to load latest Strava activities");
-        setLoading(false);
-      }
-    };
-
-    fetchLatestActivities();
-  }, []);
-
-  if (loading) return <div>Loading latest Strava activities...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (activities.length === 0) return <div>No recent activities found</div>;
-
+export default function Recents({ activities }: { activities: any }) {
   return (
     <div>
       <h2 className="pb-2">Latest Activities</h2>
-      {activities.map((activity) => (
+      {activities.map((activity: Activity) => (
         <div key={activity.id} className="border p-4 rounded-lg mb-4">
           <h3 className="font-semibold">{activity.name}</h3>
 

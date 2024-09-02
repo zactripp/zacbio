@@ -1,41 +1,13 @@
-const clientId = process.env.STRAVA_CLIENT_ID;
-const clientSecret = process.env.STRAVA_CLIENT_SECRET;
-const refreshToken = process.env.STRAVA_REFRESH_TOKEN;
+export async function getStravaStats() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+  const res = await fetch(`${apiUrl}/api/strava/stats`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch stats");
+  return res.json();
+}
 
-const url = 'https://www.strava.com/oauth/token';
-
-export async function getAccessToken() {
-  if (!clientId || !clientSecret || !refreshToken) {
-    console.error("Missing environment variables");
-    throw new Error("Missing environment variables");
-  }
-
-  const body = new URLSearchParams({
-    client_id: clientId,
-    client_secret: clientSecret,
-    refresh_token: refreshToken,
-    grant_type: "refresh_token",
-  });
-
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body,
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log("Strava API response:", data);
-    return data.access_token;
-  } catch (error) {
-    console.error("Error fetching access token:", error);
-    throw error;
-  }
+export async function getStravaActivities() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+  const res = await fetch(`${apiUrl}/api/strava/activities`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch activities");
+  return res.json();
 }

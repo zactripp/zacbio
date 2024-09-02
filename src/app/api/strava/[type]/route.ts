@@ -69,10 +69,7 @@ export async function GET(
 ) {
   try {
     const { type } = params;
-
-    // Always get a fresh access token
     const accessToken = await getAccessToken();
-    console.log("Access token today 31aug:", accessToken);
 
     let data;
     if (type === 'stats') {
@@ -81,16 +78,10 @@ export async function GET(
     } else if (type === 'activities') {
       const url = 'https://www.strava.com/api/v3/athlete/activities?per_page=5';
       data = await fetchStravaData(url, accessToken as string);
-      if (Array.isArray(data) && data.length > 0) {
-        console.log('Most recent activity date:', new Date(data[0].start_date).toLocaleString());
-      } else {
-        console.log('No activities found or data is not an array');
-      }
     } else {
       return NextResponse.json({ error: 'Invalid endpoint' }, { status: 400 });
     }
 
-    // Return the response without cache headers
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error fetching Strava data:', error);

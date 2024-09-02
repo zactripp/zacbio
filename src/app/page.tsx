@@ -1,19 +1,27 @@
+export const dynamic = "force-dynamic";
+
 import Image from "next/image";
 import StravaStats from "./_components/stats";
 import Recents from "./_components/recents";
 import { Separator } from "@/components/ui/separator";
-import { getAccessToken } from "@/lib/strava";
+import { getStravaActivities, getStravaStats } from "@/lib/strava";
 
 export default async function Home() {
-  // let accessToken;
-  // try {
-  //   accessToken = await getAccessToken();
-  // } catch (error) {
-  //   console.error("Failed to get access token or stats:", error);
-  // }
+  let stats, stravaActivities;
+
+  try {
+    [stats, stravaActivities] = await Promise.all([
+      getStravaStats(),
+      getStravaActivities(),
+    ]);
+  } catch (error) {
+    console.error("Error fetching Strava data:", error);
+    stats = null;
+    stravaActivities = null;
+  }
 
   return (
-    <main className="flex flex-col items-center w-full pt-2 pb-8 h-screen">
+    <main className="flex flex-col items-center w-full pt-2 pb-8">
       <div className="max-w-[650px] w-full px-4 sm:px-6 md:px-8">
         <Image
           src="/spacex2.jpeg"
@@ -47,10 +55,18 @@ export default async function Home() {
               <li>- Other: MySQL, Postgres, Tailwind, Solidity</li>
             </ul>
           </div>
-          {/* <Separator />
           <Separator />
-          <Recents />
-          {accessToken && <p>Access Token: {accessToken}</p>} */}
+          {stats ? (
+            <StravaStats stats={stats} />
+          ) : (
+            <div>No Strava stats available</div>
+          )}
+          <Separator />
+          {stravaActivities ? (
+            <Recents activities={stravaActivities} />
+          ) : (
+            <div>No recent activities available</div>
+          )}
         </div>
       </div>
     </main>
