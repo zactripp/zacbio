@@ -16,6 +16,11 @@ export default async function Home() {
     ]);
   } catch (error) {
     console.error("Error fetching Strava data:", error);
+    // Log the API URL being used
+    console.error(
+      "API URL:",
+      process.env.NEXT_PUBLIC_API_URL || "https://bio.acidgambit.com"
+    );
     stats = null;
     stravaActivities = null;
   }
