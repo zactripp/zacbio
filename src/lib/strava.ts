@@ -19,3 +19,4 @@ export async function getStravaActivities() {
   }
   return res.json();
 }
+
