@@ -4,24 +4,10 @@ import Image from "next/image";
 import StravaStats from "./_components/stats";
 import Recents from "./_components/recents";
 import { Separator } from "@/components/ui/separator";
-import {
-  getHelloMessage,
-  getStravaActivities,
-  getStravaStats,
-} from "@/lib/strava";
+import { getStravaActivities, getStravaStats } from "@/lib/strava";
 
 export default async function Home() {
   let stats, stravaActivities;
-
-  let hello;
-
-  try {
-    hello = await getHelloMessage();
-    console.log(hello);
-  } catch (error) {
-    console.error("Error fetching hello message:", error);
-    hello = { message: "Failed to fetch hello message" };
-  }
 
   try {
     [stats, stravaActivities] = await Promise.all([
@@ -75,8 +61,6 @@ export default async function Home() {
             </ul>
           </div>
           <Separator />
-          <h2>API Test</h2>
-          <p>{hello.message}</p>
           {stats ? (
             <StravaStats stats={stats} />
           ) : (
