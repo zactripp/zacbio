@@ -69,7 +69,8 @@ export async function GET(
 ) {
   try {
     const { type } = params;
-    const accessToken = await getAccessToken();
+    // const accessToken = await getAccessToken();
+    const accessToken = "185599f123033294b25f4ab7300d62207973be9f";
 
     let data;
     if (type === 'stats') {
