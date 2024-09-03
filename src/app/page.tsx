@@ -55,7 +55,7 @@ export default async function Home() {
               <li>- Other: MySQL, Postgres, Tailwind, Solidity</li>
             </ul>
           </div>
-          <Separator />
+          {/* <Separator />
           {stats ? (
             <StravaStats stats={stats} />
           ) : (
@@ -66,7 +66,7 @@ export default async function Home() {
             <Recents activities={stravaActivities} />
           ) : (
             <div>No recent activities available</div>
-          )}
+          )} */}
         </div>
       </div>
     </main>
