@@ -8,7 +8,7 @@ const url = 'https://www.strava.com/oauth/token';
 
 async function getAccessToken() {
   // const now = Math.floor(Date.now() / 1000);
-
+  console.log("retrieving new access token")
   if (!clientId || !clientSecret || !refreshToken) {
     return NextResponse.json({ error: 'Missing environment variables' }, { status: 500 });
   }
@@ -69,8 +69,8 @@ export async function GET(
 ) {
   try {
     const { type } = params;
-    // const accessToken = await getAccessToken();
-    const accessToken = "185599f123033294b25f4ab7300d62207973be9f";
+    const accessToken = await getAccessToken();
+
 
     let data;
     if (type === 'stats') {
