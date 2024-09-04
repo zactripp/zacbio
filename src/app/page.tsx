@@ -4,23 +4,21 @@ import Image from "next/image";
 import StravaStats from "./_components/stats";
 import Recents from "./_components/recents";
 import { Separator } from "@/components/ui/separator";
-import { getStravaActivities, getStravaStats } from "@/lib/strava";
+import { getAccessToken, getActivities, getStats } from "@/lib/strava";
 
 export default async function Home() {
   let stats, stravaActivities;
-
+  const accessToken = await getAccessToken();
+  // console.log("accessToken", accessToken);
   try {
     [stats, stravaActivities] = await Promise.all([
-      getStravaStats(),
-      getStravaActivities(),
+      getStats({ accessToken }),
+      getActivities({ accessToken }),
     ]);
   } catch (error) {
     console.error("Error fetching Strava data:", error);
     // Log the API URL being used
-    console.error(
-      "API URL:",
-      process.env.NEXT_PUBLIC_API_URL || "https://bio.acidgambit.com"
-    );
+    console.error("access token use: ", accessToken);
     stats = null;
     stravaActivities = null;
   }
