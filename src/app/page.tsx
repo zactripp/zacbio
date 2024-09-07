@@ -7,18 +7,18 @@ import { Separator } from "@/components/ui/separator";
 import { getStravaStats, getStravaActivities } from "@/lib/strava";
 
 export default async function Home() {
-  let stats, stravaActivities;
+  // let stats, stravaActivities;
 
-  try {
-    [stats, stravaActivities] = await Promise.all([
-      getStravaStats(),
-      getStravaActivities(),
-    ]);
-  } catch (error) {
-    console.error("Error fetching Strava data:", error);
-    stats = null;
-    stravaActivities = null;
-  }
+  // try {
+  //   [stats, stravaActivities] = await Promise.all([
+  //     getStravaStats(),
+  //     getStravaActivities(),
+  //   ]);
+  // } catch (error) {
+  //   console.error("Error fetching Strava data:", error);
+  //   stats = null;
+  //   stravaActivities = null;
+  // }
 
   return (
     <main className="flex flex-col items-center w-full pt-2 pb-8">
@@ -55,7 +55,7 @@ export default async function Home() {
               <li>- Other: MySQL, Postgres, Tailwind, Solidity</li>
             </ul>
           </div>
-          <Separator />
+          {/* <Separator />
           {stats ? (
             <StravaStats stats={stats} />
           ) : (
@@ -66,7 +66,7 @@ export default async function Home() {
             <Recents activities={stravaActivities.slice(0, 5)} />
           ) : (
             <div>No recent activities available</div>
-          )}
+          )} */}
         </div>
       </div>
     </main>
