@@ -4,21 +4,18 @@ import Image from "next/image";
 import StravaStats from "./_components/stats";
 import Recents from "./_components/recents";
 import { Separator } from "@/components/ui/separator";
-import { getAccessToken, getActivities, getStats } from "@/lib/strava";
+import { getStravaStats, getStravaActivities } from "@/lib/strava";
 
 export default async function Home() {
   let stats, stravaActivities;
-  const accessToken = await getAccessToken();
-  // console.log("accessToken", accessToken);
+
   try {
     [stats, stravaActivities] = await Promise.all([
-      getStats({ accessToken }),
-      getActivities({ accessToken }),
+      getStravaStats(),
+      getStravaActivities(),
     ]);
   } catch (error) {
     console.error("Error fetching Strava data:", error);
-    // Log the API URL being used
-    console.error("access token use: ", accessToken);
     stats = null;
     stravaActivities = null;
   }
@@ -66,7 +63,7 @@ export default async function Home() {
           )}
           <Separator />
           {stravaActivities ? (
-            <Recents activities={stravaActivities} />
+            <Recents activities={stravaActivities.slice(0, 5)} />
           ) : (
             <div>No recent activities available</div>
           )}
