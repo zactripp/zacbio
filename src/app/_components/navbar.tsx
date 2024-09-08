@@ -1,16 +1,34 @@
-import Image from "next/image";
-
 export function Navbar() {
   return (
     <header>
-      <div className="top-0 left-0 p-2 w-full flex justify-between items-center tracking-tighter">
-        <div className="font-bold">
-          <a className="hover:underline underline-offset-4" href="/">
-            ACID GAMBIT
+      <div className="top-0 left-0 p-2 w-full flex justify-between items-end tracking-tighter">
+        <div className="font-mono text-sm font-medium">
+          <a
+            className="text-sm font-medium hover:underline underline-offset-4"
+            href="/"
+          >
+            matt wilder
           </a>
         </div>
         <nav className="items-center font-mono ml-auto flex gap-4 sm:gap-6">
-          <Image src="/logo.png" alt="logo" width={40} height={40} />
+          <a
+            className="text-sm font-medium hover:underline underline-offset-4"
+            href="/"
+          >
+            home
+          </a>
+          <a
+            className="text-sm font-medium hover:underline underline-offset-4"
+            href="/projects"
+          >
+            projects
+          </a>
+          {/* <a
+            className="text-sm font-medium hover:underline underline-offset-4"
+            href="/bad-writing"
+          >
+            bad writing
+          </a> */}
         </nav>
       </div>
     </header>
