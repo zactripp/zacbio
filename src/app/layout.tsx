@@ -7,8 +7,8 @@ import { Navbar } from "./_components/navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MW Bio",
-  description: "About MW",
+  title: "AG Coaching",
+  description: "Something Must Be Done.",
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} p-2`}>
+      <body className={`${inter.className} p-2 dark`}>
         <Navbar />
         {children}
         <Footer />
