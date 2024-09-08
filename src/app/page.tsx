@@ -7,19 +7,6 @@ import { Separator } from "@/components/ui/separator";
 import { getStravaStats, getStravaActivities } from "@/lib/strava";
 
 export default async function Home() {
-  // let stats, stravaActivities;
-
-  // try {
-  //   [stats, stravaActivities] = await Promise.all([
-  //     getStravaStats(),
-  //     getStravaActivities(),
-  //   ]);
-  // } catch (error) {
-  //   console.error("Error fetching Strava data:", error);
-  //   stats = null;
-  //   stravaActivities = null;
-  // }
-
   return (
     <main className="flex flex-col items-center w-full pt-2 pb-8">
       <div className="max-w-[650px] w-full px-4 sm:px-6 md:px-8">
