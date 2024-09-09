@@ -22,6 +22,11 @@ export default async function Home() {
         </p>
         <div className="mt-8 flex flex-col gap-4">
           <div>
+            <h2>Current</h2>
+            <p>Learning about AI and integrating w/ health+fitness</p>
+          </div>
+          <Separator />
+          <div>
             <h2>Work</h2>
             <p>
               Technical Program Manager: Lead the Army Organization Server
