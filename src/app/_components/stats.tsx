@@ -1,10 +1,27 @@
 import Link from "next/link";
+import React from "react";
+import { getAthleteStats } from "@/lib/strava";
+import { AthleteStats } from "~/types/strava";
 
-export default function StravaStats({ stats }: { stats: any }) {
+export default async function Stats() {
+  // const stats: AthleteStats = await getAthleteStats();
+
+  let stats: AthleteStats | null = null;
+
+  try {
+    stats = await getAthleteStats();
+  } catch (error) {
+    console.error(error);
+  }
+
+  if (!stats) {
+    return <div>Error loading stats.</div>;
+  }
+
   return (
     <div>
       <h2>
-        Trailing 28 Day{" "}
+        Recent{" "}
         <Link
           href="https://www.strava.com/athletes/7445195"
           className="underline underline-offset-2 hover:text-orange-500"
@@ -13,10 +30,10 @@ export default function StravaStats({ stats }: { stats: any }) {
         </Link>{" "}
         Stats
       </h2>
-      <p className="text-xs font-mono">
+      {/* <p className="text-xs font-mono">
         live stream from strava api v3. Local cache, revalidate every 10 mins
         due to ratelimits
-      </p>
+      </p> */}
 
       <div className="flex flex-row gap-8">
         <div>

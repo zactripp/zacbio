@@ -1,10 +1,9 @@
 export const dynamic = "force-dynamic";
 
 import Image from "next/image";
-import StravaStats from "./_components/stats";
-import Recents from "./_components/recents";
 import { Separator } from "@/components/ui/separator";
-import { getStravaStats, getStravaActivities } from "@/lib/strava";
+import Stats from "./_components/stats";
+import Recents from "./_components/recents";
 
 export default async function Home() {
   return (
@@ -47,18 +46,11 @@ export default async function Home() {
               <li>- Other: MySQL, Postgres, Tailwind, Solidity</li>
             </ul>
           </div>
-          {/* <Separator />
-          {stats ? (
-            <StravaStats stats={stats} />
-          ) : (
-            <div>No Strava stats available</div>
-          )}
           <Separator />
-          {stravaActivities ? (
-            <Recents activities={stravaActivities.slice(0, 5)} />
-          ) : (
-            <div>No recent activities available</div>
-          )} */}
+
+          <Stats />
+          <Separator />
+          <Recents />
         </div>
       </div>
     </main>

@@ -22,6 +22,21 @@ export default async function Projects() {
             </Link>
           </div>
           <div>
+            <p className="font-mono font-bold">IntegrateRx</p>
+            <p>
+              Designing and building webapp to connect clinics and pharmacies
+              for compounding therapies while integrating with the largest
+              ePrescription provider in the Nation.
+              nextjs/ts/postgres/drizzle/trpc
+            </p>
+            <Link
+              className="underline underline-offset-1 text-sm font-mono text-slate-600"
+              href="https://github.com/mattbrc/integrateRx"
+            >
+              github
+            </Link>
+          </div>
+          <div>
             <p className="font-mono font-bold">Writing</p>
             <p>
               Writing about reaching peak strength, speed, and performance
