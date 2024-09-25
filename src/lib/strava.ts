@@ -1,5 +1,12 @@
-import fetch from 'node-fetch';
 import { AthleteStats, Activity } from '~/types/strava';
+
+interface AccessTokenResponse {
+  token_type: string;
+  access_token: string;
+  expires_at: number;
+  expires_in: number;
+  refresh_token: string;
+}
 
 export async function getAccessToken(): Promise<string> {
   const response = await fetch('https://www.strava.com/oauth/token', {
@@ -19,7 +26,7 @@ export async function getAccessToken(): Promise<string> {
     throw new Error(`Failed to get access token: ${response.statusText}`);
   }
 
-  const data = await response.json();
+  const data: AccessTokenResponse = await response.json();
   return data.access_token;
 }
 
