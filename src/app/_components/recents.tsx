@@ -65,12 +65,12 @@ export default async function Recents() {
                     activity.start_date_local
                   ).toLocaleString()}{" "}
                   <br />
-                  <Badge variant="acid">
-                    {activity.type === "WeightTraining"
-                      ? "Weight Training"
-                      : activity.type}
-                  </Badge>
                 </p>
+                <Badge variant="acid">
+                  {activity.type === "WeightTraining"
+                    ? "Weight Training"
+                    : activity.type}
+                </Badge>
               </li>
             </div>
           ))}
