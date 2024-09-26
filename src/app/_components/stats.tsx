@@ -32,10 +32,7 @@ export default async function Stats() {
         </Link>{" "}
         Stats
       </h2>
-      {/* <p className="text-xs font-mono">
-        live stream from strava api v3. Local cache, revalidate every 10 mins
-        due to ratelimits
-      </p> */}
+      <p className="text-xs font-mono">live stream from strava api v3.</p>
 
       <div className="flex flex-row gap-8">
         <div>
