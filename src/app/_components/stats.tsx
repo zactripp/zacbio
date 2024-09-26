@@ -23,7 +23,7 @@ export default async function Stats() {
   return (
     <div>
       <h2>
-        Recent{" "}
+        Trailing 30d{" "}
         <Link
           href="https://www.strava.com/athletes/7445195"
           className="underline underline-offset-2 hover:text-orange-500"
