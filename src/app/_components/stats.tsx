@@ -3,6 +3,8 @@ import React from "react";
 import { getAthleteStats } from "@/lib/strava";
 import { AthleteStats } from "~/types/strava";
 
+// export const revalidate = 0;
+
 export default async function Stats() {
   // const stats: AthleteStats = await getAthleteStats();
 

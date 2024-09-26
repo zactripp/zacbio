@@ -14,6 +14,7 @@ export async function getAccessToken(): Promise<string> {
     headers: {
       'Content-Type': 'application/json',
     },
+    cache: 'no-store',
     body: JSON.stringify({
       client_id: process.env.STRAVA_CLIENT_ID,
       client_secret: process.env.STRAVA_CLIENT_SECRET,
@@ -27,12 +28,14 @@ export async function getAccessToken(): Promise<string> {
   }
 
   const data: AccessTokenResponse = await response.json();
+  console.log(data);
   return data.access_token;
 }
 
 
 export async function getAthleteStats(): Promise<AthleteStats> {
   const accessToken = await getAccessToken();
+  console.log("access token from stats fetch: ", accessToken);
   const athleteId = process.env.STRAVA_ATHLETE_ID;
 
   const response = await fetch(
@@ -41,6 +44,7 @@ export async function getAthleteStats(): Promise<AthleteStats> {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      cache: 'no-store',
     }
   );
 
@@ -54,6 +58,7 @@ export async function getAthleteStats(): Promise<AthleteStats> {
 
 export async function getRecentActivities(perPage: number = 5): Promise<Activity[]> {
   const accessToken = await getAccessToken();
+  console.log("access token from activities fetch: ", accessToken);
 
   const response = await fetch(
     `https://www.strava.com/api/v3/athlete/activities?per_page=${perPage}`,
@@ -61,6 +66,7 @@ export async function getRecentActivities(perPage: number = 5): Promise<Activity
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
+      cache: 'no-store',
     }
   );
 

@@ -4,6 +4,8 @@ import React from "react";
 import { getAthleteStats, getRecentActivities } from "@/lib/strava";
 import { AthleteStats, Activity } from "~/types/strava";
 
+// export const revalidate = 0;
+
 export default async function Recents() {
   let activities: Activity[] = [];
 
