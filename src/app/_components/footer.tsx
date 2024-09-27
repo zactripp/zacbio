@@ -10,7 +10,7 @@ export function Footer() {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://linkedin.com/mattwilder1"
+            href="https://linkedin.com/in/mattwilder1"
           >
             linkedin
           </a>
