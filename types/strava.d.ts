@@ -34,5 +34,6 @@ export interface Activity {
   utc_offset: number;
   average_speed: number; // in m/s
   max_speed: number; // in m/s
+  sport_type: string;
   // other fields
 }
