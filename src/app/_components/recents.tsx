@@ -56,7 +56,6 @@ export default async function Recents() {
         <ul>
           {activities.map((activity) => (
             <div key={activity.id} className="pb-2">
-              <Separator />
               <li key={activity.id}>
                 <h3 className="font-semibold pt-2">{activity.name}</h3>
                 <p className="text-sm text-muted-foreground">

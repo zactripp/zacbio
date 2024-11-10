@@ -79,7 +79,7 @@ export async function getRecentActivities(perPage: number = 5): Promise<Activity
   return data;
 }
 
-export async function get30dActivities(perPage: number = 30): Promise<number> {
+export async function get30dActivities(perPage: number = 30): Promise<{ strengthSessionCount: number, walkDuration: number }> {
   const accessToken = await getAccessToken();
   console.log("access token from activities fetch: ", accessToken);
 
@@ -104,7 +104,11 @@ export async function get30dActivities(perPage: number = 30): Promise<number> {
     activity => activity.type === 'WeightTraining' || activity.sport_type === 'WeightTraining'
   ).length;
 
+  const walkDuration = activities.filter(
+    activity => activity.sport_type === 'Walk'
+  ).reduce((total, activity) => total + activity.moving_time, 0);
+
   console.log("strengthSessionCount: ", strengthSessionCount);
 
-  return strengthSessionCount;
+  return { strengthSessionCount, walkDuration };
 }

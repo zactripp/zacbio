@@ -10,9 +10,12 @@ export default async function Stats() {
 
   let stats: AthleteStats | null = null;
   let strengthSessionCount: number | null = null;
+  let walkDuration: number | null = null;
   try {
     stats = await getAthleteStats();
-    strengthSessionCount = await get30dActivities();
+    const moreStats = await get30dActivities();
+    strengthSessionCount = moreStats.strengthSessionCount;
+    walkDuration = moreStats.walkDuration;
   } catch (error) {
     console.error(error);
   }
@@ -63,9 +66,14 @@ export default async function Stats() {
           </ul>
         </div>
         <div>
-          <p className="font-mono font-bold pt-2">Lifts</p>
+          <p className="font-mono font-bold pt-2">Walks</p>
           <ul>
-            <li>Count: {strengthSessionCount}</li>
+            <li>
+              Dur:{" "}
+              {walkDuration === null
+                ? "No data"
+                : (walkDuration / 3600).toFixed(2) + " hours"}
+            </li>
           </ul>
         </div>
       </div>
