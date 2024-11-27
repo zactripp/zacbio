@@ -22,7 +22,10 @@ export default async function Home() {
         <div className="mt-8 flex flex-col gap-4">
           <div>
             <h2>Current</h2>
-            <p>Learning about AI and integrating w/ health+fitness</p>
+            <p>
+              Developing applications to revitalize patient care for
+              practitioners + clinics
+            </p>
           </div>
           <Separator />
           <div>
