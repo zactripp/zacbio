@@ -1,3 +1,5 @@
+import MonoCard from "@/components/mono-card";
+import MonoHeader from "@/components/mono-header";
 import Link from "next/link";
 
 export default async function Projects() {
@@ -5,11 +7,9 @@ export default async function Projects() {
     <main className="flex flex-col items-center w-full pt-2 pb-4">
       <div className="max-w-[650px] w-full px-4 sm:px-6 md:px-8">
         <div className="flex flex-col gap-4">
-          <div>
-            <h2>Projects</h2>
-          </div>
-          <div>
-            <p className="font-mono font-bold">AG Studio</p>
+          <MonoHeader title="Projects" />
+
+          <MonoCard title="AG Studio">
             <p>
               Cool fitness app. 500+ subs, stripe integration,
               nextjs/ts/mysql/drizzle/trpc
@@ -20,9 +20,9 @@ export default async function Projects() {
             >
               app.acidgambit.com
             </Link>
-          </div>
-          <div>
-            <p className="font-mono font-bold">IntegrateRx</p>
+          </MonoCard>
+
+          <MonoCard title="IntegrateRx">
             <p>
               Designing and building webapp to connect clinics and pharmacies
               for compounding therapies while integrating with the largest
@@ -35,9 +35,9 @@ export default async function Projects() {
             >
               github
             </Link>
-          </div>
-          <div>
-            <p className="font-mono font-bold">Writing</p>
+          </MonoCard>
+
+          <MonoCard title="Writing">
             <p>
               Writing about reaching peak strength, speed, and performance
               through the use of training fundamentals, accessible lifestyle
@@ -50,9 +50,9 @@ export default async function Projects() {
             >
               Substack
             </Link>
-          </div>
-          <div>
-            <p className="font-mono font-bold">Gastimate</p>
+          </MonoCard>
+
+          <MonoCard title="Gastimate">
             <p>
               A method of computing gas cost in USD for foundry users. Convert
               estimated function gas usage to USD.
@@ -63,9 +63,9 @@ export default async function Projects() {
             >
               Github
             </Link>
-          </div>
-          <div>
-            <p className="font-mono font-bold">HUD</p>
+          </MonoCard>
+
+          <MonoCard title="HUD">
             <p>(wip) A speed and rpm heads up display for my F150</p>
             <Link
               className="underline underline-offset-1 text-sm font-mono text-slate-600"
@@ -73,9 +73,9 @@ export default async function Projects() {
             >
               Post
             </Link>
-          </div>
-          <div>
-            <p className="font-mono font-bold">HFSS Quickstart</p>
+          </MonoCard>
+
+          <MonoCard title="HFSS Quickstart">
             <p>
               Electromagnetic spectrum simulation Python Interface to quickly
               get started with design + analysis.
@@ -86,9 +86,9 @@ export default async function Projects() {
             >
               Github
             </Link>
-          </div>
-          <div>
-            <p className="font-mono font-bold">Acid Gambit (brand)</p>
+          </MonoCard>
+
+          <MonoCard title="Acid Gambit (brand)">
             <p>
               Fitness brand, creative outlet, and annual mid-5 fig side biz.
             </p>
@@ -98,7 +98,7 @@ export default async function Projects() {
             >
               Instagram
             </Link>
-          </div>
+          </MonoCard>
         </div>
       </div>
     </main>

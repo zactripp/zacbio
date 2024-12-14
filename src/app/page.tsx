@@ -10,6 +10,7 @@ import MonoHeader from "@/components/mono-header";
 import MonoBadge from "@/components/mono-badge";
 import { List, ListItem } from "@/components/mono-list";
 import MonoTable from "@/components/mono-table";
+import MonoFooter from "@/components/mono-footer";
 
 export default async function Home() {
   return (
@@ -26,7 +27,7 @@ export default async function Home() {
           subtitle="Falcon 9, 08-04-2024"
         />
         <div className="mt-4 flex flex-col gap-4">
-          <MonoCard title="Current">idk.</MonoCard>
+          <MonoCard title="Current">WIP.</MonoCard>
 
           <MonoCard title="Work">
             Technical Program Manager: Lead the Army Organization Server
@@ -44,7 +45,6 @@ export default async function Home() {
             </List>
           </MonoCard>
           <Stats />
-          <Separator />
           <Recents />
         </div>
       </div>

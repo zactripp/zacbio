@@ -4,12 +4,13 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const navItems = [
-  { href: "/", label: "HOME" },
-  { href: "/projects", label: "PROJECTS" },
-  { href: "https://acidgambit.substack.com/", label: "WRITING" },
+  { href: "https://linkedin.com/in/mattwilder1", label: "LINKEDIN" },
+  { href: "https://github.com/mattbrc", label: "GITHUB" },
+  { href: "https://instagram.com/acidgambit", label: "INSTAGRAM" },
+  { href: "https://x.com/acidgambit_", label: "X" },
 ];
 
-export default function MonoNav() {
+export default function MonoFooter() {
   const pathname = usePathname();
 
   return (

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Footer } from "./_components/footer";
-import { Navbar } from "./_components/navbar";
 import MonoNav from "@/components/mono-nav";
+import MonoFooter from "@/components/mono-footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +21,7 @@ export default function RootLayout({
       <body className={`${inter.className} p-2`}>
         <MonoNav />
         {children}
-        <Footer />
+        <MonoFooter />
       </body>
     </html>
   );
