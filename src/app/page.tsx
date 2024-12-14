@@ -26,10 +26,7 @@ export default async function Home() {
           subtitle="Falcon 9, 08-04-2024"
         />
         <div className="mt-4 flex flex-col gap-4">
-          <MonoCard title="Current">
-            Developing applications to revitalize patient care for practitioners
-            + clinics
-          </MonoCard>
+          <MonoCard title="Current">idk.</MonoCard>
 
           <MonoCard title="Work">
             Technical Program Manager: Lead the Army Organization Server
