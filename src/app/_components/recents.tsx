@@ -3,15 +3,30 @@ import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { getAthleteStats, getRecentActivities } from "@/lib/strava";
 import { AthleteStats, Activity } from "~/types/strava";
-
-// export const revalidate = 0;
+import MonoCard from "@/components/mono-card";
+import MonoTable from "@/components/mono-table";
+import MonoBadge from "@/components/mono-badge";
 
 export default async function Recents() {
   let activities: Activity[] = [];
+  let data = [["NAME", "TYPE", "DISTANCE", "TIME", "DATE"]]; // Header row
 
   try {
-    // Fetch athlete stats and recent activities concurrently
     activities = await getRecentActivities(5);
+
+    if (activities.length > 0) {
+      activities.forEach((activity) => {
+        data.push([
+          activity.name,
+          activity.type === "WeightTraining"
+            ? "Weight Training"
+            : activity.type,
+          `${(activity.distance / 1609.34).toFixed(2)} mi`,
+          formatTime(activity.moving_time),
+          new Date(activity.start_date_local).toLocaleString(),
+        ]);
+      });
+    }
   } catch (error) {
     console.error(error);
   }
@@ -22,61 +37,10 @@ export default async function Recents() {
 
   return (
     <div>
-      {/* <h2 className="pb-2">Latest Activities</h2>
-      {activities.map((activity: Activity) => (
-        <div key={activity.id} className="py-2">
-          <Separator />
-          <h3 className="font-semibold pt-2">{activity.name}</h3>
-
-          <p className="text-xs font-mono pb-2">
-            {new Date(activity.start_date).toLocaleDateString()}
-          </p>
-          <p>
-            {Math.floor(activity.moving_time / 60) >= 60
-              ? `${Math.floor(activity.moving_time / 3600)}h ${Math.floor((activity.moving_time % 3600) / 60)}m`
-              : `${Math.floor(activity.moving_time / 60)}m`}{" "}
-            |{" "}
-            {activity.distance === 0
-              ? "Whoop strap auto upload"
-              : `${(activity.distance / 1609.34).toFixed(2)} miles`}
-          </p>
-          <Badge variant="acid">
-            {activity.type === "WeightTraining"
-              ? "Weight Training"
-              : activity.type}
-          </Badge>
-        </div>
-      ))} */}
-      <h2 className="pb-4">Recent Activities</h2>
-      {activities.length === 0 ? (
-        <p className="text-sm text-muted-foreground">
-          Error loading recent activities.
-        </p>
-      ) : (
-        <ul>
-          {activities.map((activity) => (
-            <div key={activity.id} className="pb-2">
-              <li key={activity.id}>
-                <h3 className="font-semibold pt-2">{activity.name}</h3>
-                <p className="text-sm text-muted-foreground">
-                  Distance: {(activity.distance / 1609.34).toFixed(2)} miles{" "}
-                  <br />
-                  Moving Time: {formatTime(activity.moving_time)} <br />
-                  Date: {new Date(
-                    activity.start_date_local
-                  ).toLocaleString()}{" "}
-                  <br />
-                </p>
-                <Badge variant="acid">
-                  {activity.type === "WeightTraining"
-                    ? "Weight Training"
-                    : activity.type}
-                </Badge>
-              </li>
-            </div>
-          ))}
-        </ul>
-      )}
+      <MonoCard title="Recent Activities">
+        <MonoTable data={data} />
+        <MonoBadge value="strava api v3" />
+      </MonoCard>
     </div>
   );
 }

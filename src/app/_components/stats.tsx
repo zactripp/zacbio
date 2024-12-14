@@ -2,20 +2,48 @@ import Link from "next/link";
 import React from "react";
 import { get30dActivities, getAthleteStats } from "@/lib/strava";
 import { AthleteStats } from "~/types/strava";
+import MonoCard from "@/components/mono-card";
+import MonoTable from "@/components/mono-table";
+import { Badge } from "@/components/ui/badge";
+import MonoBadge from "@/components/mono-badge";
 
 // export const revalidate = 0;
 
 export default async function Stats() {
-  // const stats: AthleteStats = await getAthleteStats();
-
+  let data = [["NAME", "COUNT", "DISTANCE", "HOURS"]]; // Header row
   let stats: AthleteStats | null = null;
-  let strengthSessionCount: number | null = null;
   let walkDuration: number | null = null;
+
   try {
     stats = await getAthleteStats();
     const moreStats = await get30dActivities();
-    strengthSessionCount = moreStats.strengthSessionCount;
     walkDuration = moreStats.walkDuration;
+
+    if (stats) {
+      // Add runs data
+      data.push([
+        "Runs",
+        stats.recent_run_totals.count.toString(),
+        `${(stats.recent_run_totals.distance / 1609).toFixed(2)} mi`,
+        `${(stats.recent_run_totals.moving_time / 3600).toFixed(2)}`,
+      ]);
+
+      // Add rides data
+      data.push([
+        "Rides",
+        stats.recent_ride_totals.count.toString(),
+        `${(stats.recent_ride_totals.distance / 1609).toFixed(2)} mi`,
+        `${(stats.recent_ride_totals.moving_time / 3600).toFixed(2)}`,
+      ]);
+
+      // Add walks data
+      data.push([
+        "Walks",
+        "—",
+        "—",
+        walkDuration === null ? "—" : `${(walkDuration / 3600).toFixed(2)}`,
+      ]);
+    }
   } catch (error) {
     console.error(error);
   }
@@ -26,57 +54,10 @@ export default async function Stats() {
 
   return (
     <div>
-      <h2>
-        Trailing 30d{" "}
-        <Link
-          href="https://www.strava.com/athletes/7445195"
-          className="underline underline-offset-2 hover:text-orange-500"
-        >
-          Strava
-        </Link>{" "}
-        Stats
-      </h2>
-      <p className="text-xs font-mono">live stream from strava api v3.</p>
-
-      <div className="flex flex-row gap-8">
-        <div>
-          <p className="font-mono font-bold pt-2">Runs</p>
-          <ul>
-            <li>Count: {stats.recent_run_totals.count}</li>
-            <li>
-              Dist: {(stats.recent_run_totals.distance / 1609).toFixed(2)} mi
-            </li>
-            <li>
-              Dur: {(stats.recent_run_totals.moving_time / 3600).toFixed(2)}{" "}
-              hours
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p className="font-mono font-bold pt-2">Rides</p>
-          <ul>
-            <li>Count: {stats.recent_ride_totals.count}</li>
-            <li>
-              Dist: {(stats.recent_ride_totals.distance / 1609).toFixed(2)} mi
-            </li>
-            <li>
-              Dur: {(stats.recent_ride_totals.moving_time / 3600).toFixed(2)}{" "}
-              hours
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p className="font-mono font-bold pt-2">Walks</p>
-          <ul>
-            <li>
-              Dur:{" "}
-              {walkDuration === null
-                ? "No data"
-                : (walkDuration / 3600).toFixed(2) + " hours"}
-            </li>
-          </ul>
-        </div>
-      </div>
+      <MonoCard title="Trailing 30d Strava Stats">
+        <MonoTable data={data} />
+        <MonoBadge value="strava api v3" />
+      </MonoCard>
     </div>
   );
 }
