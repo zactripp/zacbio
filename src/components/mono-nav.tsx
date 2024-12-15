@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const navItems = [
   { href: "/", label: "HOME" },
-  { href: "/projects", label: "PROJECTS" },
-  { href: "https://acidgambit.substack.com/", label: "WRITING" },
-];
+  // { href: "/projects", label: "PROJECTS" },
+  // { href: "https://acidgambit.substack.com/", label: "WRITING" },
+]
 
 export default function MonoNav() {
   const pathname = usePathname();
