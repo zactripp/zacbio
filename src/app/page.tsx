@@ -31,13 +31,9 @@ export default async function Home() {
         <div className="mt-4 flex flex-col gap-4">
           <MonoCard title="Current">WIP.</MonoCard>
 
-          <MonoCard title="Work">
-            Technical Program Manager: Lead the Army Organization Server
-            program, a data feed serving over 1 million end users. Partner with
-            developers and analytics teams to enhance product features, optimize
-            processes, and improve data accuracy by building internal analytics
-            tools (angular/node, MS Access, VBA) and engineering enhancements.
-          </MonoCard>
+          {/* <MonoCard title="Work">
+          Regimental Department Head and Manpower Project Manager: Facilitated Force Design through the overhaul of outdated table of organizations and equipment through correcting deficiencies and optimizing manpower allocation. Owning the operational project as a Program Manager from end-to-end ensuring engagement across multiple stakeholders to ensure positive outcome and implementation, overall correction of 238 deficiencies including overall Mission and Promulgation redesign. Direct project manager for 15 Marine Corps Functional Areas inspected during Commanding General Readiness Inspections in 2021 and 2024 and Inspector General Marine Corps Inspections in 2022 and 2024. Distinguished as “Noteworthy” in all 4 inspections.
+          </MonoCard> */}
           <MonoCard title="Stack">
             <List>
               <ListItem>Frontend: Next, React</ListItem>
