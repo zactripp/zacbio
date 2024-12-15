@@ -23,7 +23,7 @@ export default function MonoImage({
         alt={alt}
         width={width}
         height={height}
-        className="w-full h-[200px] object-cover"
+        className="w-full object-cover"
       />
       <p className="font-mono pt-1 text-center text-sm text-gray-600">
         {subtitle}

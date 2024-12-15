@@ -20,12 +20,12 @@ export default async function Home() {
           <MonoHeader title="Zac Tripp" />
         </div>
         <MonoImage
-          src="/spacex2.jpeg"
-          alt="Profile"
-          width={650}
-          height={300}
-          subtitle="Falcon 9, 08-04-2024"
-        />
+  src="/zact.jpeg"
+  alt="Profile"
+  width={650}
+  height={300} // Adjust this to the actual height you want
+  subtitle="Location Unknown"
+/>
         <div className="mt-4 flex flex-col gap-4">
           <MonoCard title="Current">WIP.</MonoCard>
 
