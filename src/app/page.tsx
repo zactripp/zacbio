@@ -44,8 +44,7 @@ export default async function Home() {
               <ListItem>Other: MySQL, Postgres, Tailwind, Solidity</ListItem>
             </List>
           </MonoCard>
-          <Stats />
-          <Recents />
+          
         </div>
       </div>
     </main>
