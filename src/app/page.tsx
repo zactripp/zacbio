@@ -26,20 +26,37 @@ export default async function Home() {
           alt="Profile"
           width={650}
           height={300} // Adjust this to the actual height you want
-  subtitle="Location Unknown"
-/>
+          subtitle="Location Unknown"
+        />
         <div className="mt-4 flex flex-col gap-4">
-          <MonoCard title="Current">WIP.</MonoCard>
+          <MonoCard title="Current">
+            Assiting the USMC Marksmanship Center of Excellence in acclerating
+            the lethality of every Service Member through rapid deployment of
+            cutting edge technology (Joint Marksmanship Assessement Package
+            (JMAP)) and doctrinal changes to instruction and directives in
+            accordance with the Marksmanship Campaign Plan.
+          </MonoCard>
 
           <MonoCard title="Work">
-          Regimental Department Head and Manpower Project Manager: Facilitated Force Design through the overhaul of outdated table of organizations and equipment through correcting deficiencies and optimizing manpower allocation. Owning the operational project as a Program Manager from end-to-end ensuring engagement across multiple stakeholders to ensure positive outcome and implementation, overall correction of 238 deficiencies including overall Mission and Promulgation redesign. Direct project manager for 15 Marine Corps Functional Areas inspected during Commanding General Readiness Inspections in 2021 and 2024 and Inspector General Marine Corps Inspections in 2022 and 2024. Distinguished as “Noteworthy” in all 4 inspections.
+            Regimental Department Head and Manpower Project Manager: Facilitated
+            Force Design through the overhaul of outdated table of organizations
+            and equipment through correcting deficiencies and optimizing
+            manpower allocation. Owning the operational project as a Program
+            Manager from end-to-end ensuring engagement across multiple
+            stakeholders to ensure positive outcome and implementation, overall
+            correction of 238 deficiencies including overall Mission and
+            Promulgation redesign. Direct project manager for 15 Marine Corps
+            Functional Areas inspected during Commanding General Readiness
+            Inspections in 2021 and 2024 and Inspector General Marine Corps
+            Inspections in 2022 and 2024. Distinguished as “Noteworthy” in all 4
+            inspections.
           </MonoCard>
-          <MonoCard title="Stack">
+          <MonoCard title="Certifications">
             <List>
-              <ListItem>Frontend: Next, React</ListItem>
-              <ListItem>Backend: tRPC, Drizzle, Prisma</ListItem>
-              <ListItem>Languages: TypeScript, Python, Go</ListItem>
-              <ListItem>Other: MySQL, Postgres, Tailwind, Solidity</ListItem>
+              <ListItem>Project Management Professional (PMP)</ListItem>
+              <ListItem>DOD Top Secret/SCI Clearance</ListItem>
+              <ListItem>Naval Justice School - Legal Officer</ListItem>
+              <ListItem>Financial Accounting Certification</ListItem>
             </List>
           </MonoCard>
         </div>

@@ -1,4 +1,4 @@
-import { AthleteStats, Activity } from '~/types/strava';
+import { AthleteStats, Activity } from "~/types/strava";
 
 interface AccessTokenResponse {
   token_type: string;
@@ -9,17 +9,17 @@ interface AccessTokenResponse {
 }
 
 export async function getAccessToken(): Promise<string> {
-  const response = await fetch('https://www.strava.com/oauth/token', {
-    method: 'POST',
+  const response = await fetch("https://www.strava.com/oauth/token", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    cache: 'no-store',
+    cache: "no-store",
     body: JSON.stringify({
       client_id: process.env.STRAVA_CLIENT_ID,
       client_secret: process.env.STRAVA_CLIENT_SECRET,
       refresh_token: process.env.STRAVA_REFRESH_TOKEN,
-      grant_type: 'refresh_token',
+      grant_type: "refresh_token",
     }),
   });
 
@@ -32,7 +32,6 @@ export async function getAccessToken(): Promise<string> {
   return data.access_token;
 }
 
-
 export async function getAthleteStats(): Promise<AthleteStats> {
   const accessToken = await getAccessToken();
   console.log("access token from stats fetch: ", accessToken);
@@ -44,7 +43,7 @@ export async function getAthleteStats(): Promise<AthleteStats> {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      cache: 'no-store',
+      cache: "no-store",
     }
   );
 
@@ -56,7 +55,9 @@ export async function getAthleteStats(): Promise<AthleteStats> {
   return data;
 }
 
-export async function getRecentActivities(perPage: number = 5): Promise<Activity[]> {
+export async function getRecentActivities(
+  perPage: number = 5
+): Promise<Activity[]> {
   const accessToken = await getAccessToken();
   console.log("access token from activities fetch: ", accessToken);
 
@@ -66,7 +67,7 @@ export async function getRecentActivities(perPage: number = 5): Promise<Activity
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      cache: 'no-store',
+      cache: "no-store",
     }
   );
 
@@ -79,7 +80,9 @@ export async function getRecentActivities(perPage: number = 5): Promise<Activity
   return data;
 }
 
-export async function get30dActivities(perPage: number = 30): Promise<{ strengthSessionCount: number, walkDuration: number }> {
+export async function get30dActivities(
+  perPage: number = 30
+): Promise<{ strengthSessionCount: number; walkDuration: number }> {
   const accessToken = await getAccessToken();
   console.log("access token from activities fetch: ", accessToken);
 
@@ -89,7 +92,7 @@ export async function get30dActivities(perPage: number = 30): Promise<{ strength
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      cache: 'no-store',
+      cache: "no-store",
     }
   );
 
@@ -98,15 +101,17 @@ export async function get30dActivities(perPage: number = 30): Promise<{ strength
   }
 
   const activities: Activity[] = await response.json();
-  
+
   // Count strength training sessions
   const strengthSessionCount = activities.filter(
-    activity => activity.type === 'WeightTraining' || activity.sport_type === 'WeightTraining'
+    (activity) =>
+      activity.type === "WeightTraining" ||
+      activity.sport_type === "WeightTraining"
   ).length;
 
-  const walkDuration = activities.filter(
-    activity => activity.sport_type === 'Walk'
-  ).reduce((total, activity) => total + activity.moving_time, 0);
+  const walkDuration = activities
+    .filter((activity) => activity.sport_type === "Walk")
+    .reduce((total, activity) => total + activity.moving_time, 0);
 
   console.log("strengthSessionCount: ", strengthSessionCount);
 
