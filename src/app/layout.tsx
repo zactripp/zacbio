@@ -7,8 +7,8 @@ import MonoFooter from "@/components/mono-footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MW Bio",
-  description: "About MW",
+  title: "ZT Bio",
+  description: "About ZT",
 };
 
 export default function RootLayout({

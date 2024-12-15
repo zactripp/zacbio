@@ -11,6 +11,7 @@ import MonoBadge from "@/components/mono-badge";
 import { List, ListItem } from "@/components/mono-list";
 import MonoTable from "@/components/mono-table";
 import MonoFooter from "@/components/mono-footer";
+import MonoSubHeader from "@/components/mono-subheader";
 
 export default async function Home() {
   return (
@@ -18,12 +19,13 @@ export default async function Home() {
       <div className="max-w-[650px] w-full px-4 sm:px-6 md:px-8">
         <div className="mb-4">
           <MonoHeader title="Zac Tripp" />
+          <MonoSubHeader text="I'm a Veteran Marine Captain and Project Manager with a passion for building products that make a difference." />
         </div>
         <MonoImage
-  src="/zact.jpeg"
-  alt="Profile"
-  width={650}
-  height={300} // Adjust this to the actual height you want
+          src="/zact.jpeg"
+          alt="Profile"
+          width={650}
+          height={300} // Adjust this to the actual height you want
   subtitle="Location Unknown"
 />
         <div className="mt-4 flex flex-col gap-4">
